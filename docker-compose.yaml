@@ -1,0 +1,25 @@
+version: '3.4'
+services:
+  db:
+    image: mysql:8.0.28
+    environment:
+      MYSQL_DATABASE: 'super-app'
+      MYSQL_ROOT_PASSWORD: '$SuperApp1'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+  app-php:
+    build: Dockerfile
+    ports:
+      - "8080:80"
+    expose:
+      - '8080'
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    expose:
+      - '80'
+    volumes:
+      - ./custon-nginx.conf:/etc/nginx/conf.d/custon-nginx.conf
